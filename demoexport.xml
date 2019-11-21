@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <!DOCTYPE POWERMART SYSTEM "powrmart.dtd">
-<POWERMART CREATION_DATE="11/06/2019 15:01:14" REPOSITORY_VERSION="187.96">
+<POWERMART CREATION_DATE="11/21/2019 11:27:33" REPOSITORY_VERSION="187.96">
 <REPOSITORY NAME="rep_coe_dev" VERSION="187" CODEPAGE="MS1252" DATABASETYPE="Oracle">
 <FOLDER NAME="coe_demo" GROUP="" OWNER="Administrator" SHARED="NOTSHARED" DESCRIPTION="" PERMISSIONS="rwx---rwx" UUID="a9f48b9f-68f2-4dfa-9770-4cd4bf7e5e71">
     <SOURCE BUSINESSNAME ="" DATABASETYPE ="Oracle" DBDNAME ="Oracle" DESCRIPTION ="" NAME ="lti_src" OBJECTVERSION ="1" OWNERNAME ="" VERSIONNUMBER ="1">
         <SOURCEFIELD BUSINESSNAME ="" DATATYPE ="varchar2" DESCRIPTION ="" FIELDNUMBER ="1" FIELDPROPERTY ="0" FIELDTYPE ="ELEMITEM" HIDDEN ="NO" KEYTYPE ="NOT A KEY" LENGTH ="0" LEVEL ="0" NAME ="First_Name" NULLABLE ="NULL" OCCURS ="0" OFFSET ="0" PHYSICALLENGTH ="255" PHYSICALOFFSET ="0" PICTURETEXT ="" PRECISION ="255" SCALE ="0" USAGE_FLAGS =""/>
         <SOURCEFIELD BUSINESSNAME ="" DATATYPE ="varchar2" DESCRIPTION ="" FIELDNUMBER ="2" FIELDPROPERTY ="0" FIELDTYPE ="ELEMITEM" HIDDEN ="NO" KEYTYPE ="NOT A KEY" LENGTH ="0" LEVEL ="0" NAME ="Last_Name" NULLABLE ="NULL" OCCURS ="0" OFFSET ="0" PHYSICALLENGTH ="255" PHYSICALOFFSET ="255" PICTURETEXT ="" PRECISION ="255" SCALE ="0" USAGE_FLAGS =""/>
     </SOURCE>
-    <TARGET BUSINESSNAME ="" CONSTRAINT ="" DATABASETYPE ="Oracle" DESCRIPTION ="" NAME ="lti_tgt" OBJECTVERSION ="1" TABLEOPTIONS ="" VERSIONNUMBER ="1">
-        <TARGETFIELD BUSINESSNAME ="" DATATYPE ="varchar2" DESCRIPTION ="" FIELDNUMBER ="1" KEYTYPE ="NOT A KEY" NAME ="First_Name" NULLABLE ="NULL" PICTURETEXT ="" PRECISION ="255" SCALE ="0"/>
-        <TARGETFIELD BUSINESSNAME ="" DATATYPE ="varchar2" DESCRIPTION ="" FIELDNUMBER ="2" KEYTYPE ="NOT A KEY" NAME ="Last_Name" NULLABLE ="NULL" PICTURETEXT ="" PRECISION ="255" SCALE ="0"/>
+    <TARGET BUSINESSNAME ="" CONSTRAINT ="" DATABASETYPE ="Oracle" DESCRIPTION ="" NAME ="LTI_TGT" OBJECTVERSION ="1" TABLEOPTIONS ="" VERSIONNUMBER ="1">
+        <TARGETFIELD BUSINESSNAME ="" DATATYPE ="varchar2" DESCRIPTION ="" FIELDNUMBER ="1" KEYTYPE ="NOT A KEY" NAME ="FIRST_NAME" NULLABLE ="NULL" PICTURETEXT ="" PRECISION ="255" SCALE ="0"/>
+        <TARGETFIELD BUSINESSNAME ="" DATATYPE ="varchar2" DESCRIPTION ="" FIELDNUMBER ="2" KEYTYPE ="NOT A KEY" NAME ="LAST_NAME" NULLABLE ="NULL" PICTURETEXT ="" PRECISION ="255" SCALE ="0"/>
     </TARGET>
-    <MAPPING DESCRIPTION ="" ISVALID ="YES" NAME ="m_lti_demo" OBJECTVERSION ="1" VERSIONNUMBER ="1">
+    <MAPPING DESCRIPTION ="" ISVALID ="YES" NAME ="m_lti_ora_src_ora_tgt" OBJECTVERSION ="1" VERSIONNUMBER ="1">
         <TRANSFORMATION DESCRIPTION ="" NAME ="SQ_lti_src" OBJECTVERSION ="1" REUSABLE ="NO" TYPE ="Source Qualifier" VERSIONNUMBER ="1">
             <TRANSFORMFIELD DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="" NAME ="First_Name" PICTURETEXT ="" PORTTYPE ="INPUT/OUTPUT" PRECISION ="255" SCALE ="0"/>
             <TRANSFORMFIELD DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="" NAME ="Last_Name" PICTURETEXT ="" PORTTYPE ="INPUT/OUTPUT" PRECISION ="255" SCALE ="0"/>
@@ -32,19 +32,19 @@
             <TRANSFORMFIELD DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="" EXPRESSION ="Last_Name" EXPRESSIONTYPE ="GENERAL" NAME ="Last_Name" PICTURETEXT ="" PORTTYPE ="INPUT/OUTPUT" PRECISION ="255" SCALE ="0"/>
             <TABLEATTRIBUTE NAME ="Tracing Level" VALUE ="Normal"/>
         </TRANSFORMATION>
-        <INSTANCE DESCRIPTION ="" NAME ="lti_tgt" TRANSFORMATION_NAME ="lti_tgt" TRANSFORMATION_TYPE ="Target Definition" TYPE ="TARGET"/>
+        <INSTANCE DESCRIPTION ="" NAME ="LTI_TGT" TRANSFORMATION_NAME ="LTI_TGT" TRANSFORMATION_TYPE ="Target Definition" TYPE ="TARGET"/>
         <INSTANCE DBDNAME ="Oracle" DESCRIPTION ="" NAME ="lti_src" TRANSFORMATION_NAME ="lti_src" TRANSFORMATION_TYPE ="Source Definition" TYPE ="SOURCE"/>
         <INSTANCE DESCRIPTION ="" NAME ="SQ_lti_src" REUSABLE ="NO" TRANSFORMATION_NAME ="SQ_lti_src" TRANSFORMATION_TYPE ="Source Qualifier" TYPE ="TRANSFORMATION">
             <ASSOCIATED_SOURCE_INSTANCE NAME ="lti_src"/>
         </INSTANCE>
         <INSTANCE DESCRIPTION ="" NAME ="EXPTRANS" REUSABLE ="NO" TRANSFORMATION_NAME ="EXPTRANS" TRANSFORMATION_TYPE ="Expression" TYPE ="TRANSFORMATION"/>
-        <CONNECTOR FROMFIELD ="First_Name" FROMINSTANCE ="EXPTRANS" FROMINSTANCETYPE ="Expression" TOFIELD ="First_Name" TOINSTANCE ="lti_tgt" TOINSTANCETYPE ="Target Definition"/>
-        <CONNECTOR FROMFIELD ="Last_Name" FROMINSTANCE ="EXPTRANS" FROMINSTANCETYPE ="Expression" TOFIELD ="Last_Name" TOINSTANCE ="lti_tgt" TOINSTANCETYPE ="Target Definition"/>
+        <CONNECTOR FROMFIELD ="First_Name" FROMINSTANCE ="EXPTRANS" FROMINSTANCETYPE ="Expression" TOFIELD ="FIRST_NAME" TOINSTANCE ="LTI_TGT" TOINSTANCETYPE ="Target Definition"/>
+        <CONNECTOR FROMFIELD ="Last_Name" FROMINSTANCE ="EXPTRANS" FROMINSTANCETYPE ="Expression" TOFIELD ="LAST_NAME" TOINSTANCE ="LTI_TGT" TOINSTANCETYPE ="Target Definition"/>
         <CONNECTOR FROMFIELD ="First_Name" FROMINSTANCE ="lti_src" FROMINSTANCETYPE ="Source Definition" TOFIELD ="First_Name" TOINSTANCE ="SQ_lti_src" TOINSTANCETYPE ="Source Qualifier"/>
         <CONNECTOR FROMFIELD ="Last_Name" FROMINSTANCE ="lti_src" FROMINSTANCETYPE ="Source Definition" TOFIELD ="Last_Name" TOINSTANCE ="SQ_lti_src" TOINSTANCETYPE ="Source Qualifier"/>
         <CONNECTOR FROMFIELD ="First_Name" FROMINSTANCE ="SQ_lti_src" FROMINSTANCETYPE ="Source Qualifier" TOFIELD ="First_Name" TOINSTANCE ="EXPTRANS" TOINSTANCETYPE ="Expression"/>
         <CONNECTOR FROMFIELD ="Last_Name" FROMINSTANCE ="SQ_lti_src" FROMINSTANCETYPE ="Source Qualifier" TOFIELD ="Last_Name" TOINSTANCE ="EXPTRANS" TOINSTANCETYPE ="Expression"/>
-        <TARGETLOADORDER ORDER ="1" TARGETINSTANCE ="lti_tgt"/>
+        <TARGETLOADORDER ORDER ="1" TARGETINSTANCE ="LTI_TGT"/>
         <ERPINFO/>
     </MAPPING>
     <CONFIG DESCRIPTION ="Default session configuration object" ISDEFAULT ="YES" NAME ="default_session_config" VERSIONNUMBER ="1">
@@ -88,86 +88,274 @@
         <ATTRIBUTE NAME ="Session on Grid" VALUE =""/>
         <ATTRIBUTE NAME ="Is Enabled" VALUE ="NO"/>
     </CONFIG>
-    <WORKFLOW DESCRIPTION ="" ISENABLED ="YES" ISRUNNABLESERVICE ="NO" ISSERVICE ="NO" ISVALID ="YES" NAME ="wf_lti_demo" REUSABLE_SCHEDULER ="NO" SCHEDULERNAME ="Scheduler" SERVERNAME ="intg_coe_dev" SERVER_DOMAINNAME ="lti_dm_coe" SUSPEND_ON_ERROR ="NO" TASKS_MUST_RUN_ON_SERVER ="NO" VERSIONNUMBER ="1">
+    <SESSION DESCRIPTION ="" ISVALID ="YES" MAPPINGNAME ="m_lti_ora_src_ora_tgt" NAME ="s_m_lti_ora_src_ora_tgt" REUSABLE ="YES" SORTORDER ="Binary" VERSIONNUMBER ="1">
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="LTI_TGT" STAGE ="1" TRANSFORMATIONNAME ="LTI_TGT" TRANSFORMATIONTYPE ="Target Definition"/>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="0" SINSTANCENAME ="lti_src" STAGE ="0" TRANSFORMATIONNAME ="lti_src" TRANSFORMATIONTYPE ="Source Definition"/>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="SQ_lti_src" STAGE ="2" TRANSFORMATIONNAME ="SQ_lti_src" TRANSFORMATIONTYPE ="Source Qualifier"/>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="1" SINSTANCENAME ="EXPTRANS" STAGE ="2" TRANSFORMATIONNAME ="EXPTRANS" TRANSFORMATIONTYPE ="Expression">
+            <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
+        </SESSTRANSFORMATIONINST>
+        <CONFIGREFERENCE REFOBJECTNAME ="default_session_config" TYPE ="Session config"/>
+        <SESSIONEXTENSION NAME ="Relational Writer" SINSTANCENAME ="LTI_TGT" SUBTYPE ="Relational Writer" TRANSFORMATIONTYPE ="Target Definition" TYPE ="WRITER">
+            <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="Oracle_Tgt" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="Oracle" CONNECTIONTYPE ="Relational" VARIABLE =""/>
+            <ATTRIBUTE NAME ="Target load type" VALUE ="Normal"/>
+            <ATTRIBUTE NAME ="Insert" VALUE ="YES"/>
+            <ATTRIBUTE NAME ="Update as Update" VALUE ="YES"/>
+            <ATTRIBUTE NAME ="Update as Insert" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Update else Insert" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Delete" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Truncate target table option" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Reject file directory" VALUE ="$PMBadFileDir&#x5c;"/>
+            <ATTRIBUTE NAME ="Reject filename" VALUE ="lti_tgt1.bad"/>
+        </SESSIONEXTENSION>
+        <SESSIONEXTENSION DSQINSTNAME ="SQ_lti_src" DSQINSTTYPE ="Source Qualifier" NAME ="Relational Reader" SINSTANCENAME ="lti_src" SUBTYPE ="Relational Reader" TRANSFORMATIONTYPE ="Source Definition" TYPE ="READER"/>
+        <SESSIONEXTENSION NAME ="Relational Reader" SINSTANCENAME ="SQ_lti_src" SUBTYPE ="Relational Reader" TRANSFORMATIONTYPE ="Source Qualifier" TYPE ="READER">
+            <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="Oracle_Src" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="Oracle" CONNECTIONTYPE ="Relational" VARIABLE =""/>
+        </SESSIONEXTENSION>
+        <ATTRIBUTE NAME ="General Options" VALUE =""/>
+        <ATTRIBUTE NAME ="Write Backward Compatible Session Log File" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Session Log File Name" VALUE ="s_m_lti_ora_src_ora_tgt.log"/>
+        <ATTRIBUTE NAME ="Session Log File directory" VALUE ="$PMSessionLogDir&#x5c;"/>
+        <ATTRIBUTE NAME ="Parameter Filename" VALUE =""/>
+        <ATTRIBUTE NAME ="Enable Test Load" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="$Source connection value" VALUE =""/>
+        <ATTRIBUTE NAME ="$Target connection value" VALUE =""/>
+        <ATTRIBUTE NAME ="Treat source rows as" VALUE ="Insert"/>
+        <ATTRIBUTE NAME ="Commit Type" VALUE ="Target"/>
+        <ATTRIBUTE NAME ="Commit Interval" VALUE ="10000"/>
+        <ATTRIBUTE NAME ="Commit On End Of File" VALUE ="YES"/>
+        <ATTRIBUTE NAME ="Rollback Transactions on Errors" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Recovery Strategy" VALUE ="Fail task and continue workflow"/>
+        <ATTRIBUTE NAME ="Java Classpath" VALUE =""/>
+        <ATTRIBUTE NAME ="Performance" VALUE =""/>
+        <ATTRIBUTE NAME ="DTM buffer size" VALUE ="Auto"/>
+        <ATTRIBUTE NAME ="Collect performance data" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Write performance data to repository" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Incremental Aggregation" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Enable high precision" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Session retry on deadlock" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Pushdown Optimization" VALUE ="None"/>
+        <ATTRIBUTE NAME ="Allow Temporary View for Pushdown" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Allow Temporary Sequence for Pushdown" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Allow Pushdown for User Incompatible Connections" VALUE ="NO"/>
+    </SESSION>
+    <WORKFLOW DESCRIPTION ="" ISENABLED ="YES" ISRUNNABLESERVICE ="NO" ISSERVICE ="NO" ISVALID ="YES" NAME ="wf_lti_src_ora_tgt_ora" REUSABLE_SCHEDULER ="NO" SCHEDULERNAME ="Scheduler" SERVERNAME ="intg_coe_dev" SERVER_DOMAINNAME ="lti_dm_coe" SUSPEND_ON_ERROR ="NO" TASKS_MUST_RUN_ON_SERVER ="NO" VERSIONNUMBER ="1">
         <SCHEDULER DESCRIPTION ="" NAME ="Scheduler" REUSABLE ="NO" VERSIONNUMBER ="1">
             <SCHEDULEINFO SCHEDULETYPE ="ONDEMAND"/>
         </SCHEDULER>
         <TASK DESCRIPTION ="" NAME ="Start" REUSABLE ="NO" TYPE ="Start" VERSIONNUMBER ="1"/>
-        <SESSION DESCRIPTION ="" ISVALID ="YES" MAPPINGNAME ="m_lti_demo" NAME ="s_m_lti_demo" REUSABLE ="NO" SORTORDER ="Binary" VERSIONNUMBER ="1">
-            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="lti_tgt" STAGE ="1" TRANSFORMATIONNAME ="lti_tgt" TRANSFORMATIONTYPE ="Target Definition"/>
-            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="0" SINSTANCENAME ="lti_src" STAGE ="0" TRANSFORMATIONNAME ="lti_src" TRANSFORMATIONTYPE ="Source Definition"/>
-            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="SQ_lti_src" STAGE ="2" TRANSFORMATIONNAME ="SQ_lti_src" TRANSFORMATIONTYPE ="Source Qualifier"/>
-            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="1" SINSTANCENAME ="EXPTRANS" STAGE ="2" TRANSFORMATIONNAME ="EXPTRANS" TRANSFORMATIONTYPE ="Expression">
-                <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
-            </SESSTRANSFORMATIONINST>
-            <CONFIGREFERENCE REFOBJECTNAME ="default_session_config" TYPE ="Session config">
-                <ATTRIBUTE NAME ="Save session log for these runs" VALUE ="5"/>
-            </CONFIGREFERENCE>
-            <SESSIONEXTENSION NAME ="Relational Writer" SINSTANCENAME ="lti_tgt" SUBTYPE ="Relational Writer" TRANSFORMATIONTYPE ="Target Definition" TYPE ="WRITER">
-                <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="Oracle_Tgt" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="Oracle" CONNECTIONTYPE ="Relational" VARIABLE =""/>
-                <ATTRIBUTE NAME ="Target load type" VALUE ="Normal"/>
-                <ATTRIBUTE NAME ="Insert" VALUE ="YES"/>
-                <ATTRIBUTE NAME ="Update as Update" VALUE ="YES"/>
-                <ATTRIBUTE NAME ="Update as Insert" VALUE ="NO"/>
-                <ATTRIBUTE NAME ="Update else Insert" VALUE ="NO"/>
-                <ATTRIBUTE NAME ="Delete" VALUE ="YES"/>
-                <ATTRIBUTE NAME ="Truncate target table option" VALUE ="YES"/>
-                <ATTRIBUTE NAME ="Reject file directory" VALUE ="$PMBadFileDir&#x5c;"/>
-                <ATTRIBUTE NAME ="Reject filename" VALUE ="lti_tgt1.bad"/>
-            </SESSIONEXTENSION>
-            <SESSIONEXTENSION DSQINSTNAME ="SQ_lti_src" DSQINSTTYPE ="Source Qualifier" NAME ="Relational Reader" SINSTANCENAME ="lti_src" SUBTYPE ="Relational Reader" TRANSFORMATIONTYPE ="Source Definition" TYPE ="READER"/>
-            <SESSIONEXTENSION NAME ="Relational Reader" SINSTANCENAME ="SQ_lti_src" SUBTYPE ="Relational Reader" TRANSFORMATIONTYPE ="Source Qualifier" TYPE ="READER">
-                <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="Oracle_Src" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="Oracle" CONNECTIONTYPE ="Relational" VARIABLE =""/>
-            </SESSIONEXTENSION>
-            <ATTRIBUTE NAME ="General Options" VALUE =""/>
-            <ATTRIBUTE NAME ="Write Backward Compatible Session Log File" VALUE ="NO"/>
-            <ATTRIBUTE NAME ="Session Log File Name" VALUE ="s_m_lti_demo.log"/>
-            <ATTRIBUTE NAME ="Session Log File directory" VALUE ="$PMSessionLogDir&#x5c;"/>
-            <ATTRIBUTE NAME ="Parameter Filename" VALUE =""/>
-            <ATTRIBUTE NAME ="Enable Test Load" VALUE ="NO"/>
-            <ATTRIBUTE NAME ="$Source connection value" VALUE =""/>
-            <ATTRIBUTE NAME ="$Target connection value" VALUE =""/>
-            <ATTRIBUTE NAME ="Treat source rows as" VALUE ="Insert"/>
-            <ATTRIBUTE NAME ="Commit Type" VALUE ="Target"/>
-            <ATTRIBUTE NAME ="Commit Interval" VALUE ="10000"/>
-            <ATTRIBUTE NAME ="Commit On End Of File" VALUE ="YES"/>
-            <ATTRIBUTE NAME ="Rollback Transactions on Errors" VALUE ="NO"/>
-            <ATTRIBUTE NAME ="Recovery Strategy" VALUE ="Fail task and continue workflow"/>
-            <ATTRIBUTE NAME ="Java Classpath" VALUE =""/>
-            <ATTRIBUTE NAME ="Performance" VALUE =""/>
-            <ATTRIBUTE NAME ="DTM buffer size" VALUE ="Auto"/>
-            <ATTRIBUTE NAME ="Collect performance data" VALUE ="NO"/>
-            <ATTRIBUTE NAME ="Write performance data to repository" VALUE ="NO"/>
-            <ATTRIBUTE NAME ="Incremental Aggregation" VALUE ="NO"/>
-            <ATTRIBUTE NAME ="Enable high precision" VALUE ="NO"/>
-            <ATTRIBUTE NAME ="Session retry on deadlock" VALUE ="NO"/>
-            <ATTRIBUTE NAME ="Pushdown Optimization" VALUE ="None"/>
-            <ATTRIBUTE NAME ="Allow Temporary View for Pushdown" VALUE ="NO"/>
-            <ATTRIBUTE NAME ="Allow Temporary Sequence for Pushdown" VALUE ="NO"/>
-            <ATTRIBUTE NAME ="Allow Pushdown for User Incompatible Connections" VALUE ="NO"/>
-        </SESSION>
         <TASKINSTANCE DESCRIPTION ="" ISENABLED ="YES" NAME ="Start" REUSABLE ="NO" TASKNAME ="Start" TASKTYPE ="Start"/>
-        <TASKINSTANCE DESCRIPTION ="" FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN ="NO" FAIL_PARENT_IF_INSTANCE_FAILS ="NO" ISENABLED ="YES" NAME ="s_m_lti_demo" REUSABLE ="NO" TASKNAME ="s_m_lti_demo" TASKTYPE ="Session" TREAT_INPUTLINK_AS_AND ="YES"/>
-        <WORKFLOWLINK CONDITION ="" FROMTASK ="Start" TOTASK ="s_m_lti_demo"/>
+        <TASKINSTANCE DESCRIPTION ="" FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN ="NO" FAIL_PARENT_IF_INSTANCE_FAILS ="NO" ISENABLED ="YES" NAME ="s_m_lti_ora_src_ora_tgt" REUSABLE ="YES" TASKNAME ="s_m_lti_ora_src_ora_tgt" TASKTYPE ="Session" TREAT_INPUTLINK_AS_AND ="YES"/>
+        <WORKFLOWLINK CONDITION ="" FROMTASK ="Start" TOTASK ="s_m_lti_ora_src_ora_tgt"/>
         <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task started" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.StartTime" USERDEFINED ="NO"/>
         <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task completed" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.EndTime" USERDEFINED ="NO"/>
         <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.Status" USERDEFINED ="NO"/>
         <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of the previous task that is not disabled" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.PrevTaskStatus" USERDEFINED ="NO"/>
         <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Error code for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.ErrorCode" USERDEFINED ="NO"/>
         <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="Error message for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.ErrorMsg" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task started" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.StartTime" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task completed" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.EndTime" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.Status" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of the previous task that is not disabled" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.PrevTaskStatus" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Error code for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.ErrorCode" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="Error message for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.ErrorMsg" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.SrcSuccessRows" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.SrcFailedRows" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully loaded" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.TgtSuccessRows" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to load" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.TgtFailedRows" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Total number of transformation errors" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.TotalTransErrors" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="First error code" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.FirstErrorCode" USERDEFINED ="NO"/>
-        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="First error message" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_demo.FirstErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task started" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.StartTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task completed" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.EndTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.Status" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of the previous task that is not disabled" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.PrevTaskStatus" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Error code for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.ErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="Error message for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.ErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.SrcSuccessRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.SrcFailedRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully loaded" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.TgtSuccessRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to load" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.TgtFailedRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Total number of transformation errors" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.TotalTransErrors" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="First error code" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.FirstErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="First error message" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_ora_src_ora_tgt.FirstErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="nstring" DEFAULTVALUE ="" DESCRIPTION ="" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$$SRC_CONNECTION" USERDEFINED ="YES"/>
+        <WORKFLOWVARIABLE DATATYPE ="nstring" DEFAULTVALUE ="" DESCRIPTION ="" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$$TGT_CONNECTION" USERDEFINED ="YES"/>
+        <ATTRIBUTE NAME ="Parameter Filename" VALUE =""/>
+        <ATTRIBUTE NAME ="Write Backward Compatible Workflow Log File" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Workflow Log File Name" VALUE ="wf_lti_src_ora_tgt_ora.log"/>
+        <ATTRIBUTE NAME ="Workflow Log File Directory" VALUE ="$PMWorkflowLogDir&#x5c;"/>
+        <ATTRIBUTE NAME ="Save Workflow log by" VALUE ="By runs"/>
+        <ATTRIBUTE NAME ="Save workflow log for these runs" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Service Name" VALUE =""/>
+        <ATTRIBUTE NAME ="Service Timeout" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Is Service Visible" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Is Service Protected" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Fail task after wait time" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Enable HA recovery" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Automatically recover terminated tasks" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Service Level Name" VALUE ="Default"/>
+        <ATTRIBUTE NAME ="Allow concurrent run with unique run instance name" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Allow concurrent run with same run instance name" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Maximum number of concurrent runs" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Assigned Web Services Hubs" VALUE =""/>
+        <ATTRIBUTE NAME ="Maximum number of concurrent runs per Hub" VALUE ="1000"/>
+        <ATTRIBUTE NAME ="Expected Service Time" VALUE ="1"/>
+    </WORKFLOW>
+    <SOURCE BUSINESSNAME ="" DATABASETYPE ="Flat File" DBDNAME ="FlatFile" DESCRIPTION ="" NAME ="infa_file" OBJECTVERSION ="1" OWNERNAME ="" VERSIONNUMBER ="1">
+        <FLATFILE CODEPAGE ="MS1252" CONSECDELIMITERSASONE ="NO" DELIMITED ="YES" DELIMITERS ="," ESCAPE_CHARACTER ="" KEEPESCAPECHAR ="NO" LINESEQUENTIAL ="NO" MULTIDELIMITERSASAND ="NO" NULLCHARTYPE ="ASCII" NULL_CHARACTER ="*" PADBYTES ="1" QUOTE_CHARACTER ="DOUBLE" REPEATABLE ="NO" ROWDELIMITER ="0" SHIFTSENSITIVEDATA ="NO" SKIPROWS ="0" STRIPTRAILINGBLANKS ="NO"/>
+        <TABLEATTRIBUTE NAME ="Base Table Name" VALUE =""/>
+        <TABLEATTRIBUTE NAME ="Search Specification" VALUE =""/>
+        <TABLEATTRIBUTE NAME ="Sort Specification" VALUE =""/>
+        <TABLEATTRIBUTE NAME ="Datetime Format" VALUE ="A  19 mm/dd/yyyy hh24:mi:ss"/>
+        <TABLEATTRIBUTE NAME ="Thousand Separator" VALUE ="None"/>
+        <TABLEATTRIBUTE NAME ="Decimal Separator" VALUE ="."/>
+        <TABLEATTRIBUTE NAME ="Add Currently Processed Flat File Name Port" VALUE ="NO"/>
+        <TABLEATTRIBUTE NAME ="Source TimeStamp" VALUE =""/>
+        <SOURCEFIELD BUSINESSNAME ="" DATATYPE ="string" DESCRIPTION ="" FIELDNUMBER ="1" FIELDPROPERTY ="0" FIELDTYPE ="ELEMITEM" HIDDEN ="NO" KEYTYPE ="NOT A KEY" LENGTH ="11" LEVEL ="0" NAME ="emp_id" NULLABLE ="NULL" OCCURS ="0" OFFSET ="0" PHYSICALLENGTH ="11" PHYSICALOFFSET ="0" PICTURETEXT ="" PRECISION ="11" SCALE ="0" USAGE_FLAGS =""/>
+        <SOURCEFIELD BUSINESSNAME ="" DATATYPE ="string" DESCRIPTION ="" FIELDNUMBER ="2" FIELDPROPERTY ="0" FIELDTYPE ="ELEMITEM" HIDDEN ="NO" KEYTYPE ="NOT A KEY" LENGTH ="13" LEVEL ="0" NAME ="emp_name" NULLABLE ="NULL" OCCURS ="0" OFFSET ="11" PHYSICALLENGTH ="13" PHYSICALOFFSET ="11" PICTURETEXT ="" PRECISION ="13" SCALE ="0" USAGE_FLAGS =""/>
+        <SOURCEFIELD BUSINESSNAME ="" DATATYPE ="string" DESCRIPTION ="" FIELDNUMBER ="3" FIELDPROPERTY ="0" FIELDTYPE ="ELEMITEM" HIDDEN ="NO" KEYTYPE ="NOT A KEY" LENGTH ="14" LEVEL ="0" NAME ="emp_phn" NULLABLE ="NULL" OCCURS ="0" OFFSET ="24" PHYSICALLENGTH ="14" PHYSICALOFFSET ="24" PICTURETEXT ="" PRECISION ="14" SCALE ="0" USAGE_FLAGS =""/>
+    </SOURCE>
+    <TARGET BUSINESSNAME ="" CONSTRAINT ="" DATABASETYPE ="Flat File" DESCRIPTION ="" NAME ="infa_file" OBJECTVERSION ="1" TABLEOPTIONS ="" VERSIONNUMBER ="1">
+        <FLATFILE CODEPAGE ="MS1252" CONSECDELIMITERSASONE ="NO" DELIMITED ="YES" DELIMITERS ="," ESCAPE_CHARACTER ="" KEEPESCAPECHAR ="NO" LINESEQUENTIAL ="NO" MULTIDELIMITERSASAND ="NO" NULLCHARTYPE ="ASCII" NULL_CHARACTER ="*" PADBYTES ="1" QUOTE_CHARACTER ="DOUBLE" REPEATABLE ="NO" ROWDELIMITER ="0" SKIPROWS ="0" STRIPTRAILINGBLANKS ="NO"/>
+        <TARGETFIELD BUSINESSNAME ="" DATATYPE ="string" DESCRIPTION ="" FIELDNUMBER ="1" KEYTYPE ="NOT A KEY" NAME ="emp_id" NULLABLE ="NULL" PICTURETEXT ="" PRECISION ="11" SCALE ="0"/>
+        <TARGETFIELD BUSINESSNAME ="" DATATYPE ="string" DESCRIPTION ="" FIELDNUMBER ="2" KEYTYPE ="NOT A KEY" NAME ="emp_name" NULLABLE ="NULL" PICTURETEXT ="" PRECISION ="13" SCALE ="0"/>
+        <TARGETFIELD BUSINESSNAME ="" DATATYPE ="string" DESCRIPTION ="" FIELDNUMBER ="3" KEYTYPE ="NOT A KEY" NAME ="emp_phn" NULLABLE ="NULL" PICTURETEXT ="" PRECISION ="14" SCALE ="0"/>
+        <TABLEATTRIBUTE NAME ="Datetime Format" VALUE ="A  19 mm/dd/yyyy hh24:mi:ss"/>
+        <TABLEATTRIBUTE NAME ="Thousand Separator" VALUE ="None"/>
+        <TABLEATTRIBUTE NAME ="Decimal Separator" VALUE ="."/>
+        <TABLEATTRIBUTE NAME ="Line Endings" VALUE ="System default"/>
+    </TARGET>
+    <MAPPING DESCRIPTION ="" ISVALID ="YES" NAME ="m_lti_src_file_tgt_file" OBJECTVERSION ="1" VERSIONNUMBER ="1">
+        <TRANSFORMATION DESCRIPTION ="" NAME ="EXPTRANS" OBJECTVERSION ="1" REUSABLE ="NO" TYPE ="Expression" VERSIONNUMBER ="1">
+            <TRANSFORMFIELD DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="" EXPRESSION ="emp_id" EXPRESSIONTYPE ="GENERAL" NAME ="emp_id" PICTURETEXT ="" PORTTYPE ="INPUT/OUTPUT" PRECISION ="11" SCALE ="0"/>
+            <TRANSFORMFIELD DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="" EXPRESSION ="emp_name" EXPRESSIONTYPE ="GENERAL" NAME ="emp_name" PICTURETEXT ="" PORTTYPE ="INPUT/OUTPUT" PRECISION ="13" SCALE ="0"/>
+            <TRANSFORMFIELD DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="" EXPRESSION ="emp_phn" EXPRESSIONTYPE ="GENERAL" NAME ="emp_phn" PICTURETEXT ="" PORTTYPE ="INPUT/OUTPUT" PRECISION ="14" SCALE ="0"/>
+            <TABLEATTRIBUTE NAME ="Tracing Level" VALUE ="Normal"/>
+        </TRANSFORMATION>
+        <TRANSFORMATION DESCRIPTION ="" NAME ="SQ_infa_file" OBJECTVERSION ="1" REUSABLE ="NO" TYPE ="Source Qualifier" VERSIONNUMBER ="1">
+            <TRANSFORMFIELD DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="" NAME ="emp_id" PICTURETEXT ="" PORTTYPE ="INPUT/OUTPUT" PRECISION ="11" SCALE ="0"/>
+            <TRANSFORMFIELD DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="" NAME ="emp_name" PICTURETEXT ="" PORTTYPE ="INPUT/OUTPUT" PRECISION ="13" SCALE ="0"/>
+            <TRANSFORMFIELD DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="" NAME ="emp_phn" PICTURETEXT ="" PORTTYPE ="INPUT/OUTPUT" PRECISION ="14" SCALE ="0"/>
+            <TABLEATTRIBUTE NAME ="Sql Query" VALUE =""/>
+            <TABLEATTRIBUTE NAME ="User Defined Join" VALUE =""/>
+            <TABLEATTRIBUTE NAME ="Source Filter" VALUE =""/>
+            <TABLEATTRIBUTE NAME ="Number Of Sorted Ports" VALUE ="0"/>
+            <TABLEATTRIBUTE NAME ="Tracing Level" VALUE ="Normal"/>
+            <TABLEATTRIBUTE NAME ="Select Distinct" VALUE ="NO"/>
+            <TABLEATTRIBUTE NAME ="Is Partitionable" VALUE ="NO"/>
+            <TABLEATTRIBUTE NAME ="Pre SQL" VALUE =""/>
+            <TABLEATTRIBUTE NAME ="Post SQL" VALUE =""/>
+            <TABLEATTRIBUTE NAME ="Output is deterministic" VALUE ="NO"/>
+            <TABLEATTRIBUTE NAME ="Output is repeatable" VALUE ="Never"/>
+        </TRANSFORMATION>
+        <INSTANCE DESCRIPTION ="" NAME ="infa_file1" TRANSFORMATION_NAME ="infa_file" TRANSFORMATION_TYPE ="Target Definition" TYPE ="TARGET"/>
+        <INSTANCE DESCRIPTION ="" NAME ="EXPTRANS" REUSABLE ="NO" TRANSFORMATION_NAME ="EXPTRANS" TRANSFORMATION_TYPE ="Expression" TYPE ="TRANSFORMATION"/>
+        <INSTANCE DBDNAME ="FlatFile" DESCRIPTION ="" NAME ="infa_file" TRANSFORMATION_NAME ="infa_file" TRANSFORMATION_TYPE ="Source Definition" TYPE ="SOURCE"/>
+        <INSTANCE DESCRIPTION ="" NAME ="SQ_infa_file" REUSABLE ="NO" TRANSFORMATION_NAME ="SQ_infa_file" TRANSFORMATION_TYPE ="Source Qualifier" TYPE ="TRANSFORMATION">
+            <ASSOCIATED_SOURCE_INSTANCE NAME ="infa_file"/>
+        </INSTANCE>
+        <CONNECTOR FROMFIELD ="emp_id" FROMINSTANCE ="EXPTRANS" FROMINSTANCETYPE ="Expression" TOFIELD ="emp_id" TOINSTANCE ="infa_file1" TOINSTANCETYPE ="Target Definition"/>
+        <CONNECTOR FROMFIELD ="emp_name" FROMINSTANCE ="EXPTRANS" FROMINSTANCETYPE ="Expression" TOFIELD ="emp_name" TOINSTANCE ="infa_file1" TOINSTANCETYPE ="Target Definition"/>
+        <CONNECTOR FROMFIELD ="emp_phn" FROMINSTANCE ="EXPTRANS" FROMINSTANCETYPE ="Expression" TOFIELD ="emp_phn" TOINSTANCE ="infa_file1" TOINSTANCETYPE ="Target Definition"/>
+        <CONNECTOR FROMFIELD ="emp_id" FROMINSTANCE ="SQ_infa_file" FROMINSTANCETYPE ="Source Qualifier" TOFIELD ="emp_id" TOINSTANCE ="EXPTRANS" TOINSTANCETYPE ="Expression"/>
+        <CONNECTOR FROMFIELD ="emp_name" FROMINSTANCE ="SQ_infa_file" FROMINSTANCETYPE ="Source Qualifier" TOFIELD ="emp_name" TOINSTANCE ="EXPTRANS" TOINSTANCETYPE ="Expression"/>
+        <CONNECTOR FROMFIELD ="emp_phn" FROMINSTANCE ="SQ_infa_file" FROMINSTANCETYPE ="Source Qualifier" TOFIELD ="emp_phn" TOINSTANCE ="EXPTRANS" TOINSTANCETYPE ="Expression"/>
+        <CONNECTOR FROMFIELD ="emp_id" FROMINSTANCE ="infa_file" FROMINSTANCETYPE ="Source Definition" TOFIELD ="emp_id" TOINSTANCE ="SQ_infa_file" TOINSTANCETYPE ="Source Qualifier"/>
+        <CONNECTOR FROMFIELD ="emp_name" FROMINSTANCE ="infa_file" FROMINSTANCETYPE ="Source Definition" TOFIELD ="emp_name" TOINSTANCE ="SQ_infa_file" TOINSTANCETYPE ="Source Qualifier"/>
+        <CONNECTOR FROMFIELD ="emp_phn" FROMINSTANCE ="infa_file" FROMINSTANCETYPE ="Source Definition" TOFIELD ="emp_phn" TOINSTANCE ="SQ_infa_file" TOINSTANCETYPE ="Source Qualifier"/>
+        <TARGETLOADORDER ORDER ="1" TARGETINSTANCE ="infa_file1"/>
+        <ERPINFO/>
+    </MAPPING>
+    <SESSION DESCRIPTION ="" ISVALID ="YES" MAPPINGNAME ="m_lti_src_file_tgt_file" NAME ="s_m_lti_src_file_tgt_file" REUSABLE ="YES" SORTORDER ="Binary" VERSIONNUMBER ="1">
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="infa_file1" STAGE ="1" TRANSFORMATIONNAME ="infa_file1" TRANSFORMATIONTYPE ="Target Definition">
+            <FLATFILE CODEPAGE ="MS1252" CONSECDELIMITERSASONE ="NO" DELIMITED ="YES" DELIMITERS ="," ESCAPE_CHARACTER ="" KEEPESCAPECHAR ="NO" LINESEQUENTIAL ="NO" MULTIDELIMITERSASAND ="NO" NULLCHARTYPE ="ASCII" NULL_CHARACTER ="*" PADBYTES ="1" QUOTE_CHARACTER ="DOUBLE" REPEATABLE ="NO" ROWDELIMITER ="0" SKIPROWS ="0" STRIPTRAILINGBLANKS ="NO"/>
+        </SESSTRANSFORMATIONINST>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="1" SINSTANCENAME ="EXPTRANS" STAGE ="2" TRANSFORMATIONNAME ="EXPTRANS" TRANSFORMATIONTYPE ="Expression">
+            <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
+        </SESSTRANSFORMATIONINST>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="0" SINSTANCENAME ="infa_file" STAGE ="0" TRANSFORMATIONNAME ="infa_file" TRANSFORMATIONTYPE ="Source Definition">
+            <FLATFILE CODEPAGE ="MS1252" CONSECDELIMITERSASONE ="NO" DELIMITED ="YES" DELIMITERS ="," ESCAPE_CHARACTER ="" KEEPESCAPECHAR ="NO" LINESEQUENTIAL ="NO" MULTIDELIMITERSASAND ="NO" NULLCHARTYPE ="ASCII" NULL_CHARACTER ="*" PADBYTES ="1" QUOTE_CHARACTER ="DOUBLE" REPEATABLE ="NO" ROWDELIMITER ="0" SKIPROWS ="0" STRIPTRAILINGBLANKS ="NO"/>
+        </SESSTRANSFORMATIONINST>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="SQ_infa_file" STAGE ="2" TRANSFORMATIONNAME ="SQ_infa_file" TRANSFORMATIONTYPE ="Source Qualifier"/>
+        <CONFIGREFERENCE REFOBJECTNAME ="default_session_config" TYPE ="Session config"/>
+        <SESSIONEXTENSION NAME ="File Writer" SINSTANCENAME ="infa_file1" SUBTYPE ="File Writer" TRANSFORMATIONTYPE ="Target Definition" TYPE ="WRITER">
+            <CONNECTIONREFERENCE CNXREFNAME ="Connection" CONNECTIONNAME ="" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="" CONNECTIONTYPE ="" VARIABLE =""/>
+            <ATTRIBUTE NAME ="Merge Type" VALUE ="No Merge"/>
+            <ATTRIBUTE NAME ="Merge File Directory" VALUE ="$PMTargetFileDir&#x5c;"/>
+            <ATTRIBUTE NAME ="Merge File Name" VALUE ="infa_file1.out"/>
+            <ATTRIBUTE NAME ="Append if Exists" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Create Target Directory" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Header Options" VALUE ="No Header"/>
+            <ATTRIBUTE NAME ="Header Command" VALUE =""/>
+            <ATTRIBUTE NAME ="Footer Command" VALUE =""/>
+            <ATTRIBUTE NAME ="Output Type" VALUE ="File"/>
+            <ATTRIBUTE NAME ="Merge Command" VALUE =""/>
+            <ATTRIBUTE NAME ="Output file directory" VALUE ="$$tgt_file_path&#x5c;"/>
+            <ATTRIBUTE NAME ="Output filename" VALUE ="$$tgt_file_name"/>
+            <ATTRIBUTE NAME ="Reject file directory" VALUE ="$PMBadFileDir&#x5c;"/>
+            <ATTRIBUTE NAME ="Reject filename" VALUE ="infa_file11.bad"/>
+            <ATTRIBUTE NAME ="Command" VALUE =""/>
+            <ATTRIBUTE NAME ="Codepage Parameter" VALUE =""/>
+        </SESSIONEXTENSION>
+        <SESSIONEXTENSION DSQINSTNAME ="SQ_infa_file" DSQINSTTYPE ="Source Qualifier" NAME ="File Reader" SINSTANCENAME ="infa_file" SUBTYPE ="File Reader" TRANSFORMATIONTYPE ="Source Definition" TYPE ="READER">
+            <CONNECTIONREFERENCE CNXREFNAME ="Connection" CONNECTIONNAME ="" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="" CONNECTIONTYPE ="" VARIABLE =""/>
+            <ATTRIBUTE NAME ="Input Type" VALUE ="File"/>
+            <ATTRIBUTE NAME ="Concurrent read partitioning" VALUE ="Optimize throughput"/>
+            <ATTRIBUTE NAME ="Command Type" VALUE ="Command Generating Data"/>
+            <ATTRIBUTE NAME ="Source filetype" VALUE ="Direct"/>
+            <ATTRIBUTE NAME ="Source file directory" VALUE ="$$src_file_path&#x5c;"/>
+            <ATTRIBUTE NAME ="Source filename" VALUE ="$$src_file_name"/>
+            <ATTRIBUTE NAME ="Command" VALUE =""/>
+            <ATTRIBUTE NAME ="File Reader Truncate String Null" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Codepage Parameter" VALUE =""/>
+        </SESSIONEXTENSION>
+        <SESSIONEXTENSION NAME ="File Reader" SINSTANCENAME ="SQ_infa_file" SUBTYPE ="File Reader" TRANSFORMATIONTYPE ="Source Qualifier" TYPE ="READER"/>
+        <ATTRIBUTE NAME ="General Options" VALUE =""/>
+        <ATTRIBUTE NAME ="Write Backward Compatible Session Log File" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Session Log File Name" VALUE ="s_m_lti_src_file_tgt_file.log"/>
+        <ATTRIBUTE NAME ="Session Log File directory" VALUE ="$PMSessionLogDir&#x5c;"/>
+        <ATTRIBUTE NAME ="Parameter Filename" VALUE ="&#x5c;&#x5c;172.17.118.55&#x5c;c$&#x5c;Informatica&#x5c;10.2.0&#x5c;server&#x5c;infa_shared&#x5c;Files_Dev&#x5c;SrcFiles&#x5c;param_file_txt_src_tgt.txt"/>
+        <ATTRIBUTE NAME ="Enable Test Load" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="$Source connection value" VALUE =""/>
+        <ATTRIBUTE NAME ="$Target connection value" VALUE =""/>
+        <ATTRIBUTE NAME ="Treat source rows as" VALUE ="Insert"/>
+        <ATTRIBUTE NAME ="Commit Type" VALUE ="Target"/>
+        <ATTRIBUTE NAME ="Commit Interval" VALUE ="10000"/>
+        <ATTRIBUTE NAME ="Commit On End Of File" VALUE ="YES"/>
+        <ATTRIBUTE NAME ="Rollback Transactions on Errors" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Recovery Strategy" VALUE ="Fail task and continue workflow"/>
+        <ATTRIBUTE NAME ="Java Classpath" VALUE =""/>
+        <ATTRIBUTE NAME ="Performance" VALUE =""/>
+        <ATTRIBUTE NAME ="DTM buffer size" VALUE ="Auto"/>
+        <ATTRIBUTE NAME ="Collect performance data" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Write performance data to repository" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Incremental Aggregation" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Enable high precision" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Session retry on deadlock" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Pushdown Optimization" VALUE ="None"/>
+        <ATTRIBUTE NAME ="Allow Temporary View for Pushdown" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Allow Temporary Sequence for Pushdown" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Allow Pushdown for User Incompatible Connections" VALUE ="NO"/>
+    </SESSION>
+    <WORKFLOW DESCRIPTION ="" ISENABLED ="YES" ISRUNNABLESERVICE ="NO" ISSERVICE ="NO" ISVALID ="YES" NAME ="wf_lti_src_file_tgt_file" REUSABLE_SCHEDULER ="NO" SCHEDULERNAME ="Scheduler" SERVERNAME ="intg_coe_dev" SERVER_DOMAINNAME ="lti_dm_coe" SUSPEND_ON_ERROR ="NO" TASKS_MUST_RUN_ON_SERVER ="NO" VERSIONNUMBER ="1">
+        <SCHEDULER DESCRIPTION ="" NAME ="Scheduler" REUSABLE ="NO" VERSIONNUMBER ="1">
+            <SCHEDULEINFO SCHEDULETYPE ="ONDEMAND"/>
+        </SCHEDULER>
+        <TASK DESCRIPTION ="" NAME ="Start" REUSABLE ="NO" TYPE ="Start" VERSIONNUMBER ="1"/>
+        <TASKINSTANCE DESCRIPTION ="" ISENABLED ="YES" NAME ="Start" REUSABLE ="NO" TASKNAME ="Start" TASKTYPE ="Start"/>
+        <TASKINSTANCE DESCRIPTION ="" FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN ="NO" FAIL_PARENT_IF_INSTANCE_FAILS ="NO" ISENABLED ="YES" NAME ="s_m_lti_src_file_tgt_file" REUSABLE ="YES" TASKNAME ="s_m_lti_src_file_tgt_file" TASKTYPE ="Session" TREAT_INPUTLINK_AS_AND ="YES"/>
+        <WORKFLOWLINK CONDITION ="" FROMTASK ="Start" TOTASK ="s_m_lti_src_file_tgt_file"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task started" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.StartTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task completed" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.EndTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.Status" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of the previous task that is not disabled" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.PrevTaskStatus" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Error code for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.ErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="Error message for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.ErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task started" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.StartTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task completed" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.EndTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.Status" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of the previous task that is not disabled" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.PrevTaskStatus" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Error code for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.ErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="Error message for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.ErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.SrcSuccessRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.SrcFailedRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully loaded" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.TgtSuccessRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to load" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.TgtFailedRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Total number of transformation errors" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.TotalTransErrors" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="First error code" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.FirstErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="First error message" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_lti_src_file_tgt_file.FirstErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="nstring" DEFAULTVALUE ="" DESCRIPTION ="" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$$src_file_path" USERDEFINED ="YES"/>
+        <WORKFLOWVARIABLE DATATYPE ="nstring" DEFAULTVALUE ="" DESCRIPTION ="" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$$src_file_name" USERDEFINED ="YES"/>
+        <WORKFLOWVARIABLE DATATYPE ="nstring" DEFAULTVALUE ="" DESCRIPTION ="" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$$tgt_file_path" USERDEFINED ="YES"/>
+        <WORKFLOWVARIABLE DATATYPE ="nstring" DEFAULTVALUE ="" DESCRIPTION ="" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$$tgt_file_name" USERDEFINED ="YES"/>
         <ATTRIBUTE NAME ="Parameter Filename" VALUE =""/>
         <ATTRIBUTE NAME ="Write Backward Compatible Workflow Log File" VALUE ="NO"/>
         <ATTRIBUTE NAME ="Workflow Log File Name" VALUE ="wf_lti_demo.log"/>
